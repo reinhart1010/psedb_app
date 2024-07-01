@@ -51,8 +51,11 @@ class PSEQuery {
   }
 
   factory PSEQuery.fromJson(Map<String, dynamic> json) => _$PSEQueryFromJson(json);
+  factory PSEQuery.fromString(String string) => PSEQuery.fromJson(jsonDecode(string));
 
   Map<String, dynamic> toJson() => _$PSEQueryToJson(this);
+  @override
+  String toString() => toJson().toString();
 }
 
 @JsonSerializable()

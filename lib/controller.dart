@@ -10,6 +10,7 @@ class PSEDBController extends GetxController {
   Uri? baseUrl;
   dio.Dio? httpClient;
   SharedPreferences? sharedPreferences;
+  List<PSEQuery> history = [];
 
   PSEDBController() {
     _initializeSharedPreferences();
@@ -35,6 +36,14 @@ class PSEDBController extends GetxController {
     sharedPreferences = await SharedPreferences.getInstance();
     baseUrl = Uri.parse(sharedPreferences!.getString("api_base_url") ?? "https://psedb.reinhart1010.id");
     SharedPreferences.getInstance();
+    
+    if (sharedPreferences!.containsKey("history")) {
+      try {
+        history = sharedPreferences!.getStringList("history")!.map((json) => PSEQuery.fromString(json)).toList();
+      } catch (e) {
+        // TODO: Show error dialog
+      }
+    }
   }
 
   Future<PSEQuery?> getPSEInfo(String domain) async {
@@ -65,5 +74,9 @@ class PSEDBController extends GetxController {
       httpStatus: response.statusCode,
       rawResponse: response.data,
     );
+  }
+
+  Future<void> saveToDevice() async {
+    sharedPreferences!.setStringList("history", history.map((data) => data.toString()).toList());
   }
 }
