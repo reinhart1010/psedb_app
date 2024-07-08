@@ -24,7 +24,7 @@ if (flutterVersionName == null) {
 }
 
 android {
-    namespace = "com.example.psedb_app"
+    namespace = "id.reinhart1010.psedb_app"
     compileSdk = flutter.compileSdkVersion
     ndkVersion = flutter.ndkVersion
 
@@ -35,7 +35,7 @@ android {
 
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId = "com.example.psedb_app"
+        applicationId = "id.reinhart1010.psedb_app"
         // You can update the following values to match your application needs.
         // For more information, see: https://docs.flutter.dev/deployment/android#reviewing-the-gradle-build-configuration.
         minSdk = flutter.minSdkVersion
@@ -55,4 +55,12 @@ android {
 
 flutter {
     source = "../.."
+}
+
+dependencies {
+    // your project dependency
+    constraints{
+        implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.8.0'
+        implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.8.0'
+    }
 }
